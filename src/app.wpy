@@ -1,0 +1,121 @@
+<style lang="less">
+  @import "./zanui/index.wxss";
+  @import "./assets/fonts/iconfont.less";
+  @import "./assets/styles/app.less";
+  @import "./assets/styles/utils.less";
+
+  page{
+    background-color: #efefef;
+  }
+
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+import { setStore } from 'wepy-redux'
+import configStore from './store'
+
+const store = configStore()
+setStore(store)
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index',
+      'pages/mine',
+      'pages/login',
+      'pages/register',
+      'pages/auth',
+      'pages/profile'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#ffffff',
+      navigationBarTitleText: '宝贝食谱',
+      navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      "color": "#999999",
+      "selectedColor": "#f96650",
+      "borderStyle": "white",
+      "backgroundColor": "#fff",
+      "list": [
+        {
+          "pagePath": "pages/index",
+          "iconPath": "assets/image/tabADeselected.png",
+          "selectedIconPath": "assets//image/tabASelected.png",
+          "text": "主页"
+        },
+        {
+          "pagePath": "pages/mine",
+          "iconPath": "assets/image/tabBDeselected.png",
+          "selectedIconPath": "assets//image/tabBSelected.png",
+          "text": "市集"
+        },
+        {
+          "pagePath": "pages/mine",
+          "iconPath": "assets/image/myFavourite.png",
+          "selectedIconPath": "assets//image/myfav.png",
+          "text": "收藏"
+        },
+        {
+          "pagePath": "pages/mine",
+          "iconPath": "assets/image/tabDDeselected.png",
+          "selectedIconPath": "assets//image/tabDSelected.png",
+          "text": "我"
+        }
+      ]
+    }
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+  }
+
+  onLaunch() {
+    //this.testAsync()
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
+
+  storeUserInfo(e){
+    const that = this
+
+    console.log('storeUserInfo:' )
+
+    that.globalData.userInfo = e.detail.userInfo
+    console.log(that.globalData.userInfo )
+
+  }
+
+   getUserInfo(cb) {
+    const that = this
+    console.log('getUserInfo:')
+    console.log(this.globalData.userInfo)
+
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+
+  }
+}
+</script>

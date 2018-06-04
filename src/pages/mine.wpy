@@ -1,0 +1,100 @@
+<template>
+  <view class="container">
+    <view class="zan-panel">
+      <navigator class="zan-cell zan-cell--access user-info-cell" url="./profile">
+        <view class="zan-cell__icon avatar-container" >
+          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        <view class="zan-cell__bd">
+          <view class="nickname">{{userInfo.nickName}}</view>
+          <view class="location">{{userInfo.province}} {{userInfo.city}}</view>
+        </view>
+        <view class="zan-cell__ft"></view>
+      </navigator>
+    </view>
+
+    <view class="zan-panel">
+      <navigator class="zan-cell zan-cell--access" url="./auth">
+        <icon class="zan-cell__icon iconfont icon-about1"></icon>
+        <view class="zan-cell__bd">授权</view>
+        <view class="zan-cell__ft"></view>
+      </navigator>
+    </view>
+
+
+  </view>
+</template>
+
+<style lang="less" scoped>
+  .icon-language{
+    color: #09f;
+  }
+  .icon-feedback2{
+    color: #0c9;
+  }
+  .icon-about1{
+    color: #fc3;
+  }
+  .user-info-cell{
+    height: 70px;
+    .avatar-container{
+      display: flex;
+      align-items: center;
+      .avatar{
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+      }
+    }
+    .location {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #858585;
+    }
+  }
+</style>
+
+
+<script>
+  import wepy from 'wepy'
+
+  export default class mine extends wepy.page {
+    config = {
+      navigationBarTitleText: '我'
+    }
+
+    data = {
+      userInfo: {
+        nickName: '未登录',
+        avatarUrl: '',
+        province: '',
+        city:''
+      }
+    }
+
+    methods = {}
+
+    events = {}
+
+    onShow(){
+      console.log('[mine]: onShow')
+      let userdata = this.$parent.getUserInfo()
+      if (userdata){
+        this.userInfo.nickName = userdata.nickName;
+        this.userInfo.avatarUrl = userdata.avatarUrl;
+        this.userInfo.province = userdata.province;
+        this.userInfo.city = userdata.city;
+      }
+
+    }
+    onLoad() {
+
+      console.log('[mine]: onLoad')
+      console.log(this.$parent.getUserInfo())
+      /*this.$parent.getUserInfo().then(user => {
+        this.userInfo = user
+        this.$apply()
+      })*/
+    }
+  }
+</script>

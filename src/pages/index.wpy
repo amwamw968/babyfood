@@ -1,0 +1,98 @@
+<style lang="less">
+  @import "../zanui/field/index.wxss";
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+  <view class="container">
+    <wxc-toast  class="J_toast"   text="Hello World"></wxc-toast>
+    <button @tap="showToast">调用 show() 方法显示</button>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import Panel from '@/components/panel' // alias example
+  import Counter from 'counter' // alias example
+  import List from '../components/list' // aliasFields example
+  import moduleA from 'module-a' // aliasFields ignore module example
+  import Group from '../components/group'
+  import Toast from 'wepy-com-toast'
+  import { baseUrl } from '@/config'
+  //import testMixin from '../mixins/test'
+  //import com_login from '../api/com_login'
+
+
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '宝贝食谱',
+      usingComponents: {
+        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'
+      }
+    }
+    components = {
+      panel: Panel,
+      counter1: Counter,
+      counter2: Counter,
+      list: List,
+      group: Group,
+      toast: Toast
+    }
+
+
+
+    data = {
+
+      userInfo: {
+
+      }
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      showToast() {
+        let $toast = this.$wxpage.selectComponent('.J_toast')
+        $toast && $toast.show()
+      },
+      toast () {
+        let promise = this.$invoke('toast', 'show', {
+          title: '自定义标题',
+          img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
+        })
+
+        promise.then((d) => {
+          console.log('toast done')
+        })
+      }
+    }
+
+    events = {
+
+    }
+
+    async onLoad() {
+      console.log('[index] onLoad')
+    }
+  }
+</script>

@@ -1,0 +1,15 @@
+{
+  "description": "A WePY project",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+		"minified": false,
+		"newFeature": true
+  },
+  "compileType": "miniprogram",
+  "appid": "wxa353f5197475198f",
+  "projectname": "babyfood",
+  "miniprogramRoot": "./dist",
+  "condition": {}
+}

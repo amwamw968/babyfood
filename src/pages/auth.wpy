@@ -1,0 +1,110 @@
+<style lang="less">
+  @import '../zanui/btn/index.wxss';
+
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .btn-authorize {
+    margin: 100rpx 50rpx;
+  }
+
+</style>
+<template>
+  <view class="container">
+    <view class="btn-authorize">
+      <!--<button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权</button>-->
+      <view class="zan-btns">
+        <button class="zan-btn zan-btn--warn" lang="zh_CN" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">授权</button>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import com_login from '../api/com_login'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'index'
+    }
+    components = {
+
+    }
+    data = {
+      userInfo: {
+        nickName: '加载中...'
+      }
+    }
+
+    computed = {
+
+    }
+
+
+
+    methods = {
+      async onGotUserInfo(e) {
+        console.log('onGotUserInfo:')
+        console.log(e)
+
+        /*wepy.setStorageSync('_isLogin', false)
+        wepy.setStorageSync('_isWebSocketOpen', false)
+
+        if (e.detail.errMsg === 'getUserInfo:ok') {
+          let res = await wepy.login()
+          console.log(res)
+
+
+        }*/
+        let setting = await  com_login.login(e);
+        if (wepy.getStorageSync('_isLogin')){
+          console.log('onGotUserInfo: _isLogin true')
+          this.$parent.storeUserInfo(e)
+        }
+
+      }
+    }
+
+    events = {
+
+    }
+
+    async onLoad() {
+      console.log('pages/index onLoad')
+      /*let setting = await wepy.getSetting()
+      if ((setting.authSetting)['scope.userInfo']) {
+        console.log('authSetting Success, now to home pages')
+        console.log(setting)
+        wepy.redirectTo({
+          url: '/pages/home'
+        })
+      } else {
+        console.log('Need Authorize first')
+      }*/
+      //let setting = await  com_login.login();
+      //console.log(setting)
+
+      let isLgoin = wepy.getStorageSync('_isLogin')
+      console.log('isLgoin:'+ isLgoin)
+      /*if (isLgoin){
+        wepy.redirectTo({
+          url: '/pages/index'
+        })
+      }*/
+    }
+  }
+</script>
