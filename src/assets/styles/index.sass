@@ -1,0 +1,138 @@
+@import "./minui";
+@import "./variable";
+@import "./icon-font";
+@import "./mixins";
+@import "./zan-button";
+@import "./zan-form";
+
+.container
+  width: 100%
+  overflow-x: hidden
+  min-height: 100vh
+  box-sizing: border-box
+  background: #f4f4f4
+  color: #666
+  font-family: "PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei"
+
+// -- layout
+view,
+text,
+navigator
+  box-sizing: border-box
+.db
+  display: block
+.dib
+  display: inline-block
+.fl
+  float: left
+.fr
+  float: right
+
+
+.bg_white
+  background: #fff !important
+
+.ellipsis
+  @extend %ellipsis
+
+.break_word
+  @extend %break_word
+
+.x_scroll
+  @extend %x_scroll
+
+.y_scroll
+  @extend %y_scroll
+
+
+// -- color
+.color
+  color: $color !important
+.color_light
+  color: $color_light !important
+.orange
+  color: $orange !important
+.c999
+  color: #999
+.c666
+  color: #666
+.c333
+  color: #333
+
+.flex
+  display: flex
+.flex1
+  flex: 1
+
+.tr
+  text-align: right !important
+.tc
+  text-align: center !important
+.tl
+  text-align: left !important
+
+.text_delete
+  text-decoration: line-through !important
+
+.fz20
+  font-size: 20rpx !important
+
+.fz22
+  font-size: 22rpx !important
+
+.fz24
+  font-size: 24rpx !important
+
+.fz28
+  font-size: 28rpx !important
+
+.fz32
+  font-size: 32rpx !important
+
+.fz36
+  font-size: 36rpx !important
+
+.fz40
+  font-size: 40rpx !important
+
+.fz48
+  font-size: 48rpx !important
+
+//--- margin & padding
+@for $i from 1 through 6
+  .ml#{$i}0
+    margin-left: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .mt#{$i}0
+    margin-top: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .mr#{$i}0
+    margin-right: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .mb#{$i}0
+    margin-bottom: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .pl#{$i}0
+    padding-left: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .pt#{$i}0
+    padding-top: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .pr#{$i}0
+    padding-right: 10rpx * $i !important
+
+@for $i from 1 through 6
+  .pb#{$i}0
+    padding-bottom: 10rpx * $i !important
+
+
+//-- line-height
+@for $i from 3 through 50
+  .lh#{$i}0
+    line-height: 10rpx * $i !important

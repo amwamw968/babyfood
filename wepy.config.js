@@ -24,9 +24,10 @@ module.exports = {
     less: {
       compress: prod
     },
-    /*sass: {
+    sass: {
       outputStyle: 'compressed'
-    },*/
+    },
+    pug: {},
     babel: {
       sourceMap: true,
       presets: [

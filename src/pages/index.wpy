@@ -15,11 +15,116 @@
   .userinfo-nickname {
     color: #aaa;
   }
+
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 90rpx;
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    margin: auto;     /* 有了这个就自动居中了 */
+    color: #fff;
+    background: #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .search-location {
+    height: 90rpx;
+    line-height: 90rpx;
+    margin-left: 22rpx;
+    font-size: 26rpx;
+    overflow: hidden;
+  }
+  .search {
+    flex: 1;
+    margin-top: 6rpx;
+    height: 60rpx;
+    font-size: 28rpx;
+    padding-left: 10px;
+  }
+  .search-icon {
+    width: 44rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    margin-right: 22rpx;
+  }
+
+  .search_box1{
+    display: flex;
+    width: 100%;
+    height: 72rpx;
+    line-height: 72rpx;
+    background: #fff;
+    border-radius: 6px;
+  }
+
+   .search_icon1{
+     width: 60rpx;
+     text-left: center;
+   }
+
+  .search_box_container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 90rpx;
+    color: #fff;
+    background: #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
+  }
+
+  .search_box{
+    display:flex;
+    width:100%;
+    height:72rpx;
+    line-height:60rpx;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background:#fff;
+    border-radius:6px;
+    color:#999;
+  }
+
+
+  .search_icon{
+    width:50rpx;
+    line-height:70rpx;
+    font-size:40rpx;
+    text-align:right;
+  }
+
+  .search_ipt{
+    flex:1;
+    margin-top:6rpx;
+    height:60rpx;
+    font-size:28rpx;
+    padding-left:10px;
+  }
+
 </style>
 <template>
-  <view class="container">
+  <!--<view class="container">
     <wxc-toast  class="J_toast"   text="Hello World"></wxc-toast>
     <button @tap="showToast">调用 show() 方法显示</button>
+  </view>
+
+  <view class="search_box flex1">
+    <input class="search_ipt" bindinput="bindKeyword" placeholder="搜索商品" placeholder-style="color: #999" focus="{{isFocus}}" value="{{keyword}}" confirm-type="search" bindconfirm="handleSearch"/>
+    <wxc-icon class="search-icon"  wx:if="{{keyword}}" type="close" size="26" bindtap="clearKeyword" color="#999"/>
+  </view>
+  <wxc-search class="search"
+              bg-color="#fff"
+              placeholder="今天吃点什么呢"
+              button="搜索"
+              btn-color="#2CB42F"
+              bind:input="onInput"
+              bind:submit="submitForm"
+              bind:confirm="onConfirm"></wxc-search>-->
+  <view class="search_box_container">
+    <navigator class="search_box" open-type="navigate" url="/pages/search">
+      <wxc-icon class="search_icon" type = 'search'></wxc-icon>
+      <input class="search_ipt"  placeholder="今天想吃点什么呢" />
+    </navigator>
   </view>
 
 </template>
@@ -44,7 +149,9 @@
     config = {
       navigationBarTitleText: '宝贝食谱',
       usingComponents: {
-        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'
+        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
+        'wxc-icon': '../../packages/@minui/wxc-icon/dist/index',
+        'wxc-search': '../../packages/@minui/wxc-search/dist/index'
       }
     }
     components = {
@@ -84,6 +191,18 @@
         promise.then((d) => {
           console.log('toast done')
         })
+      },
+      onInput(e) {
+        console.log('input: ', e.detail.value)
+      },
+      onConfirm(e) {
+        console.log('confirm: ', e)
+      },
+      onSearch(e) {
+        console.log('onSearch: ', e)
+      },
+      submitForm(e) {
+        console.log('submit', e)
       }
     }
 
