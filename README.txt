@@ -24,3 +24,8 @@ min install @minui/wxc-toast
 npm install
 min build
 wepy build
+
+2018-06-26
+1. add wxapp-cookie-shim
+npm install wxapp-cookie-shim --save
+import 'wxapp-cookie-shim' --app.wpy

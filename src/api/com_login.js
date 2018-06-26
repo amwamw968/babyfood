@@ -108,7 +108,7 @@ const com_login = {
     let userinfo = {}
       try {
       userinfo = await wepy.request({
-        url: 'http://127.0.0.1:3000/api/kid/register',  //这里填写后台登录url
+        url: 'http://127.0.0.1:3000/kidinfo/kidregister',  //这里填写后台登录url
         method: 'POST',
         header: {
           'access-token': '',

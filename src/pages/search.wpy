@@ -117,8 +117,8 @@ view.container
     view.goods_list
       navigator.goods_card(wx:for="{{goodeList}}" wx:key open-type="navigate" url="/pages/goods/index?goods_id={{item.goods_id}}")
         image.image(src="{{item.head_img}}?imageView2/2/w/380" mode="aspectFit")
-        view.ellipsis.fz24.c333 {{item.goods_name}}
-        view.ellipsis.fz20.color_light.subtitle {{item.goods_desc}}
+        view.ellipsis.fz24.c333 {{item.ingredient_name}}
+        view.ellipsis.fz20.orange.subtitle {{item.amount}}
         view.price
           wxc-price.color.fz32(value="{{item.price / 100}}")
           text.fr.fz20.c999 99.9%好评
@@ -202,6 +202,8 @@ view.container
       brand_id: '',
       sort: 'default', // 排序：default：综合-默认，sale：销量，price：价格
       sort_type: true, // 高->低：desc => true，低到高：asc => false
+      ingredient_name:[],
+      amount:[],
     }
 
     onLoad({goods_parent_category_id = '', goods_child_category_id = '', brand_id = ''}, {from}) {
@@ -214,26 +216,45 @@ view.container
 
     fetchData() {
       const data = {
-        keyword: this.keyword,
-        goods_parent_category_id: this.goods_parent_category_id,
+        keyword: this.keyword
+        /*goods_parent_category_id: this.goods_parent_category_id,
         goods_child_category_id: this.goods_child_category_id,
         brand_id: this.brand_id,
         page_num: this.page_num,
         sort: this.sort,
-        sort_type: this.sort_type ? 'desc' : 'asc',
+        sort_type: this.sort_type ? 'desc' : 'asc',*/
       }
+
+      /*
+      * url: 'http://www.luliangdev.cn/api/books?type=hot&major=%E7%8E%84%E5%B9%BB&page=1',
+        method: 'GET',
+        header: {
+          'access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWFhIiwiaWF0IjoxNTI4MjA3MDQ0LCJleHAiOjE1MzA3OTkwNDR9.nABN2tnZfrkA9Cz-cdpFCnd58BQN-QfWgr7RgLBgNvA',
+          'app-type': 'wx-app'
+        },
+        dataType: 'json'
+      * */
+
       wepy.request({
-        url: 'goods/list',
-        data,
+        url: 'http://127.0.0.1:3000/recipe',
+        method: 'GET',
+        header: {
+          'Content-Type': 'application/json',
+          'charset': 'UTF-8'
+        },
+        data: data
       }).then(res => {
-        if (!res.list.length) this._toggleToast()
-        this.goodeList = [...this.goodeList, ...res.list]
-        if (res.cur_page === res.total_pages) {
+
+        //this.goodeList = [...this.goodeList, ...res.data] ;
+        console.log(res.data.rows)
+        this.goodeList = [...this.goodeList, ...res.data.rows] ;
+
+        /*if (res.cur_page === res.total_pages) {
           this.scrollDisabled = true
           this.isNothing = true
         } else {
           this.scrollDisabled = false
-        }
+        }*/
         this.$apply()
       })
     }

@@ -31,6 +31,7 @@
     "@minui/wxc-search": "^1.0.1",
     "@minui/wxc-toast": "^1.0.9",
     "babel": "^6.23.0",
+    "crypto": "^1.0.1",
     "promise-polyfill": "^8.0.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
@@ -38,7 +39,8 @@
     "wepy": "^1.7.1",
     "wepy-async-function": "^1.4.6",
     "wepy-com-toast": "^1.0.2",
-    "wepy-redux": "^1.5.3"
+    "wepy-redux": "^1.5.3",
+    "wxapp-cookie-shim": "^1.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

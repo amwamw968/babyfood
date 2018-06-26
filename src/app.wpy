@@ -13,6 +13,7 @@
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
+import 'wxapp-cookie-shim'
 
 import { setStore } from 'wepy-redux'
 import configStore from './store'
